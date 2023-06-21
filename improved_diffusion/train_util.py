@@ -192,12 +192,14 @@ class TrainLoop:
         self.model.convert_to_fp16()
 
     def run_loop(self, max_iter=250000, start_print_iter=100000, vis_batch_size=8, n_rounds=3):
+        print("just inside run_loop)
         if dist.get_rank() == 0:
             pbar = tqdm()
         while (
             self.step < max_iter
         ):
             self.ddp_model.train()
+            print("model config to train")
             batch, cond, _ = next(self.data)
             self.run_step(batch, cond)
             if dist.get_rank() == 0:
