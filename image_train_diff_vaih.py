@@ -84,6 +84,7 @@ def main():
     )
     # logger.log(data)
     print(f"datadir: {args.data_dir}")
+    print(f"datadir: {args.lr}")
     
     val_dataset = VaihDataset(
         mode='val',
