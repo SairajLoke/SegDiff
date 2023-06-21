@@ -202,6 +202,8 @@ class TrainLoop:
             print("model config to train")
             batch, cond, _ = next(self.data)
             self.run_step(batch, cond)
+            print("after run_step")
+            
             if dist.get_rank() == 0:
                 pbar.update(1)
             if self.step % self.log_interval == 0 and self.step != 0:
@@ -252,6 +254,7 @@ class TrainLoop:
             self.step += 1
 
     def run_step(self, batch, cond):
+        print("in run step")
         self.forward_backward(batch, cond)
         if self.use_fp16:
             self.optimize_fp16()
