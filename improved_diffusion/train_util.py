@@ -261,6 +261,7 @@ class TrainLoop:
 
     def forward_backward(self, batch, cond):
         zero_grad(self.model_params)
+        print("in forward_backward")
         for i in range(0, batch.shape[0], self.microbatch):
             micro = batch[i : i + self.microbatch].to(dist_util.dev())
             micro_cond = {
@@ -277,13 +278,14 @@ class TrainLoop:
                 t,
                 model_kwargs=micro_cond,
             )
-
+           
             if last_batch or not self.use_ddp:
                 losses = compute_losses()
             else:
                 with self.ddp_model.no_sync():
                     losses = compute_losses()
-
+            
+            
             if isinstance(self.schedule_sampler, LossAwareSampler):
                 self.schedule_sampler.update_with_local_losses(
                     t, losses["loss"].detach()
@@ -293,6 +295,8 @@ class TrainLoop:
             log_loss_dict(
                 self.diffusion, t, {k: v * weights for k, v in losses.items()}
             )
+
+            print(f"loss {i} : {losses} ")
             if self.use_fp16:
                 loss_scale = 2 ** self.lg_loss_scale
                 (loss * loss_scale).backward()
