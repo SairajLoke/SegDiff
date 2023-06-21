@@ -157,7 +157,7 @@ class TrainLoop:
                         str(model_path), map_location=dist_util.dev()
                     )
                 )
-
+        print("went ahead")
         dist_util.sync_params(self.model.parameters())
 
     def _load_ema_parameters(self, rate, logs_path):
