@@ -82,8 +82,8 @@ def main():
         image_size=args.image_size,
         class_cond=args.class_cond
     )
-    logger.log(data)
-    logger.log(args.data_dir)
+    # logger.log(data)
+    print(f"datadir: {args.data_dir}")
     
     val_dataset = VaihDataset(
         mode='val',
