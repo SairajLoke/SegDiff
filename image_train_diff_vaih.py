@@ -75,12 +75,14 @@ def main():
     schedule_sampler = create_named_schedule_sampler(args.schedule_sampler, diffusion)
 
     logger.log("creating data loader...")
+    
     data = load_data(
         data_dir=args.data_dir,
         batch_size=args.batch_size,
         image_size=args.image_size,
         class_cond=args.class_cond
     )
+    logger.log(data)
     val_dataset = VaihDataset(
         mode='val',
         image_size=args.image_size,
