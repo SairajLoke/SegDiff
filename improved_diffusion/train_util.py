@@ -201,6 +201,7 @@ class TrainLoop:
             self.ddp_model.train()
             print("model config to train")
             batch, cond, _ = next(self.data)
+            print(f"cond: {cond}")
             self.run_step(batch, cond)
             print("after run_step")
             
