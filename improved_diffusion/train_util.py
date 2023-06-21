@@ -192,7 +192,7 @@ class TrainLoop:
         self.model.convert_to_fp16()
 
     def run_loop(self, max_iter=250000, start_print_iter=100000, vis_batch_size=8, n_rounds=3):
-        print("just inside run_loop)
+        print("just inside run_loop")
         if dist.get_rank() == 0:
             pbar = tqdm()
         while (
