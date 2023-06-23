@@ -50,7 +50,7 @@ def load_data(
     while True:
         print(f"loader {loader}")
         print(f"loader {len(loader)}")
-        print(f"loader {next( iter(loader) )} 
+        print(f"loader {next( iter(loader) )} ")
         
         yield from loader
 
