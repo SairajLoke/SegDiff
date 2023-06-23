@@ -109,7 +109,7 @@ class VaihDataset(Dataset):
 
         
         self.img_list = list(self.imgs)[shard::num_shards]
-        print(img_list[0].size())
+        print(self.img_list[0].size())
         self.mask_list = list(self.mask)[shard::num_shards]
 
     def __len__(self):
