@@ -56,6 +56,22 @@ def load_data(
         
         yield from loader
 
+def explore_group(group):
+    for name, item in group.items():
+        # Check if the item is a subgroup
+        if isinstance(item, h5py.Group):
+            print("Subgroup:", name)
+            # Recursively explore the subgroup
+            explore_group(item)
+        # Check if the item is a dataset
+        elif isinstance(item, h5py.Dataset):
+            print("Dataset:", name)
+            # Access dataset details
+            dataset = group[name]
+            print("Shape:", dataset.shape)
+            print("Datatype:", dataset.dtype)
+
+
 
 class VaihDataset(Dataset):
 
@@ -108,8 +124,9 @@ class VaihDataset(Dataset):
         self.small_image_size = small_image_size
         self.mask = self.data['mask_single']
         self.imgs = self.data['imgs']
-        print(f'imgs {mode}; {self.imgs}')
-        
+        print(f'imgs group {mode}; {self.imgs}')
+        explore_group(self.imgs)
+                     
         self.img_list = list(self.imgs)[shard::num_shards]
         print(f'img_list {mode} len : {len(self.img_list)}')
                      
