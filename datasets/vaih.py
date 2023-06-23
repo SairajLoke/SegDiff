@@ -97,7 +97,7 @@ class VaihDataset(Dataset):
             self.data_length = max_data_size
 
         if self.mode == 'train':
-            print(  f"train path to hdf5: {    str(  Path(__file__).absolute().parent.parent.parent / "data/Vaihingen/full_training_vaih.hdf5" ) }"  )
+            print(  "\n train path to hdf5:" + str(  Path(__file__).absolute().parent.parent.parent / "data/Vaihingen/full_training_vaih.hdf5" ) )
             self.data = h5py.File(
                 str(Path(__file__).absolute().parent.parent.parent / "data/Vaihingen/full_training_vaih.hdf5"), 'r')
 
