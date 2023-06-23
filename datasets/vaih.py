@@ -95,18 +95,21 @@ class VaihDataset(Dataset):
             self.data_length = max_data_size
 
         if self.mode == 'train':
-            print(      str(  Path(__file__).absolute().parent.parent / "data/Vaihingen/full_training_vaih.hdf5" )   )
+            print(      str(  Path(__file__).absolute().parent.parent.parent / "data/Vaihingen/full_training_vaih.hdf5" )   )
             self.data = h5py.File(
-                str(Path(__file__).absolute().parent.parent / "data/Vaihingen/full_training_vaih.hdf5"), 'r')
+                str(Path(__file__).absolute().parent.parent.parent / "data/Vaihingen/full_training_vaih.hdf5"), 'r')
 
         else:
             self.data = h5py.File(
-                str(Path(__file__).absolute().parent.parent / "data/Vaihingen/full_test_vaih.hdf5"), 'r')
+                str(Path(__file__).absolute().parent.parent.parent / "data/Vaihingen/full_test_vaih.hdf5"), 'r')
 
         self.small_image_size = small_image_size
         self.mask = self.data['mask_single']
         self.imgs = self.data['imgs']
+
+        
         self.img_list = list(self.imgs)[shard::num_shards]
+        print(img_list[0].size())
         self.mask_list = list(self.mask)[shard::num_shards]
 
     def __len__(self):
