@@ -50,7 +50,7 @@ def load_data(
     while True:
         print(f"loader {loader}")
         print(f"loader {len(loader)}")
-        print(f"loader {next( iter(loader) )} ")
+        # print(f"loader {next( iter(loader) )} ")
         
         yield from loader
 
@@ -95,12 +95,13 @@ class VaihDataset(Dataset):
             self.data_length = max_data_size
 
         if self.mode == 'train':
+            print(      str(  Path(__file__).absolute().parent.parent / "data/Vaihingen/full_training_vaih.hdf5" )   )
             self.data = h5py.File(
-                str(Path(__file__).absolute().parent.parent.parent / "data/Vaihingen/full_training_vaih.hdf5"), 'r')
+                str(Path(__file__).absolute().parent.parent / "data/Vaihingen/full_training_vaih.hdf5"), 'r')
 
         else:
             self.data = h5py.File(
-                str(Path(__file__).absolute().parent.parent.parent / "data/Vaihingen/full_test_vaih.hdf5"), 'r')
+                str(Path(__file__).absolute().parent.parent / "data/Vaihingen/full_test_vaih.hdf5"), 'r')
 
         self.small_image_size = small_image_size
         self.mask = self.data['mask_single']
