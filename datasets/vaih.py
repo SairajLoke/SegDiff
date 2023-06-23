@@ -57,22 +57,22 @@ def load_data(
         yield from loader
 
 def explore_group(group):
-    print(f"\n Exploring {group}")
+    print(f"\nexploring {group}")
     for name, item in group.items():
         # Check if the item is a subgroup
         if isinstance(item, h5py.Group):
-            print("Subgroup:", name)
+            print(f"Subgroup: inside {group} - ", name)
             # Recursively explore the subgroup
             explore_group(item)
         # Check if the item is a dataset
         elif isinstance(item, h5py.Dataset):
-            print("Dataset:", name)
+            print(f"Dataset: inside {group}", name)
             # Access dataset details
             dataset = group[name]
             print("Shape:", dataset.shape)
             print("Datatype:", dataset.dtype)
 
-
+    print("\n------\n")
 
 class VaihDataset(Dataset):
 
@@ -125,18 +125,18 @@ class VaihDataset(Dataset):
         self.small_image_size = small_image_size
         self.mask = self.data['mask_single']
         self.imgs = self.data['imgs']
-        print(f'imgs group {mode}; {self.imgs}')
-
-
+        print("Inside Vaih Dataset")
+                        
         explore_group(self.data)
         # explore_group(self.imgs)
         # explore_group(self.mask)
-        print(self.small_image_size)
+        # print(self.small_image_size) #is none when file is run
                      
         self.img_list = list(self.imgs)[shard::num_shards]
         print(f'img_list {mode} len : {len(self.img_list)}')
                      
         self.mask_list = list(self.mask)[shard::num_shards]
+        print("mask list - ",self.mask_list)
 
     def __len__(self):
         return len(self.img_list)
