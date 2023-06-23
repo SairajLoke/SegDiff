@@ -47,9 +47,11 @@ def load_data(
         loader = DataLoader(
             dataset, batch_size=batch_size, shuffle=True, num_workers=0, drop_last=True
         )
+    print(f"fresh loader {loader}")
+    print(f"fresh loader {len(loader)}") 
     while True:
-        print(f"loader {loader}")
-        print(f"loader {len(loader)}")
+        # print(f"loader {loader}")
+        # print(f"loader {len(loader)}") #this things keeps printing infinitely ( means althougt it is run, its not actually the current state
         # print(f"loader {next( iter(loader) )} ")
         
         yield from loader
