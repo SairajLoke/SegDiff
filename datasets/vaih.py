@@ -48,6 +48,10 @@ def load_data(
             dataset, batch_size=batch_size, shuffle=True, num_workers=0, drop_last=True
         )
     while True:
+        print(f"loader {loader}")
+        print(f"loader {len(loader)}")
+        print(f"loader {next( iter(loader) )} 
+        
         yield from loader
 
 
