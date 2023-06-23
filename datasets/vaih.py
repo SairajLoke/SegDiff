@@ -128,7 +128,7 @@ class VaihDataset(Dataset):
         print(f'imgs group {mode}; {self.imgs}')
 
 
-        explore(self.data)
+        explore_group(self.data)
         # explore_group(self.imgs)
         # explore_group(self.mask)
         print(self.small_image_size)
